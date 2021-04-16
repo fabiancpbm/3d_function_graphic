@@ -4,18 +4,23 @@ from OpenGL.GL import *
 from math import *
 
 def f(x, y):
-    return sqrt(abs(-x**2 - y**2 - 1.5**2))
+    return x**2 + y**2
 
 n, m = 100, 100
 x0, y0 = -2, -2
 xf, yf = 2, 2
 dx, dy = (xf - x0) / m, (yf - y0) / n
 ax, ay, az = 0, 0, 0
+
+def f(x, y):
+    #return sqrt(abs(-x**2 - y**2 - 1.5**2))
+    return (x**2)/(2**2) + (y**2)/(2**2) 
+
 def mesh():
     glPushMatrix()
     glTranslate(0.0, 0.0, az)
-    glRotatef(ax, 1.0, 0.0, 0.0)
-    glRotatef(ay, 0.0, 1.0, 0.0)
+    glRotatef(ax, 0.0, 1.0, 0.0)
+    glRotatef(ay, 1.0, 0.0, 0.0)
     for i in range(0, n):
         y = y0 + i * dy
         glColor3f(1 - (i/n), 0, (1/n))
@@ -50,9 +55,9 @@ def teclaEspecialPressionada(tecla, x, y):
     elif tecla == GLUT_KEY_RIGHT:
         ax += 1
     elif tecla == GLUT_KEY_UP:
-        ay += 1
-    elif tecla == GLUT_KEY_DOWN:
         ay -= 1
+    elif tecla == GLUT_KEY_DOWN:
+        ay += 1
     glutPostRedisplay()
 
 glutInit(sys.argv)
@@ -66,5 +71,5 @@ glEnable(GL_MULTISAMPLE)
 glEnable(GL_DEPTH_TEST)
 glClearColor(0, 0, 0, 1)
 gluPerspective(45, 800.0 / 600.0, 0.1, 100.0)
-glTranslatef(0.0, 0.0, -10)
+glTranslatef(0.0, 0.0, -20)
 glutMainLoop()
